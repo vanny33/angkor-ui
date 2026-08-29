@@ -50,7 +50,7 @@ export function ComponentPageClient({ locale, slug }: ComponentPageClientProps) 
   const h = locale === "km" ? kmHeadings : enHeadings;
 
   return (
-    <div className="space-y-10 max-w-4xl select-none">
+    <div className="max-w-4xl space-y-10 select-none">
       {/* Title Header */}
       <div className="space-y-2">
         <h1 className="text-3xl font-black">{comp.name}</h1>
@@ -94,7 +94,13 @@ export function ComponentPageClient({ locale, slug }: ComponentPageClientProps) 
       <section className="space-y-3">
         <h2 className="text-xl font-bold">{h.props}</h2>
         <div className="overflow-x-auto rounded-lg border border-border bg-card">
-          <table className="min-w-full divide-y divide-border text-sm">
+          <table className="w-full table-fixed divide-y divide-border text-sm">
+            <colgroup>
+              <col className="w-[16%] sm:w-[18%]" />
+              <col className="w-[30%] sm:w-[34%]" />
+              <col className="w-[15%] sm:w-[16%]" />
+              <col className="w-[39%] sm:w-[32%]" />
+            </colgroup>
             <thead className="bg-muted/50 font-semibold text-left">
               <tr>
                 <th className="px-4 py-3">{h.propName}</th>
@@ -106,10 +112,10 @@ export function ComponentPageClient({ locale, slug }: ComponentPageClientProps) 
             <tbody className="divide-y divide-border">
               {comp.props.map((prop, idx) => (
                 <tr key={idx} className="hover:bg-muted/10">
-                  <td className="px-4 py-3 font-mono text-xs text-primary font-bold">{prop.name}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-muted-foreground whitespace-pre">{prop.type}</td>
-                  <td className="px-4 py-3 font-mono text-xs text-foreground/80">{prop.default}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{prop.desc[locale]}</td>
+                  <td className="break-words px-3 py-3 font-mono text-xs font-bold text-primary sm:px-4">{prop.name}</td>
+                  <td className="break-words px-3 py-3 font-mono text-xs text-muted-foreground sm:px-4">{prop.type}</td>
+                  <td className="break-words px-3 py-3 font-mono text-xs text-foreground/80 sm:px-4">{prop.default}</td>
+                  <td className="break-words px-3 py-3 text-muted-foreground sm:px-4">{prop.desc[locale]}</td>
                 </tr>
               ))}
             </tbody>

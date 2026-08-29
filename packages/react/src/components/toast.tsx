@@ -91,6 +91,7 @@ function ToastItemComponent({
   const remainingTimeRef = React.useRef<number>(duration);
 
   const startTimer = () => {
+    if (timerRef.current || remainingTimeRef.current <= 0) return;
     startTimeRef.current = Date.now();
     timerRef.current = setTimeout(() => {
       onClose();
@@ -101,11 +102,15 @@ function ToastItemComponent({
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
-      remainingTimeRef.current -= Date.now() - startTimeRef.current;
+      remainingTimeRef.current = Math.max(
+        0,
+        remainingTimeRef.current - (Date.now() - startTimeRef.current)
+      );
     }
   };
 
   React.useEffect(() => {
+    remainingTimeRef.current = duration;
     startTimer();
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -140,8 +145,9 @@ function ToastItemComponent({
     },
     exit: {
       opacity: 0,
+      x: shouldAnimate ? (isLeft ? -48 : 48) : 0,
       scale: 0.85,
-      transition: { duration: 0.15 },
+      transition: shouldAnimate ? { duration: 0.15 } : { duration: 0 },
     },
   };
 
@@ -172,9 +178,7 @@ function ToastItemComponent({
       animate="animate"
       exit="exit"
       onAnimationComplete={(definition) => {
-        if (definition === "exit") {
-          onRemoveComplete();
-        }
+        if (definition === "exit") onRemoveComplete();
       }}
       transition={{ type: "spring", stiffness: 380, damping: 30 }}
       onMouseEnter={pauseTimer}
@@ -201,6 +205,7 @@ function ToastItemComponent({
         {action && <div className="pointer-events-auto">{action}</div>}
         <button
           onClick={onClose}
+          aria-label={locale === "km" ? "បិទដំណឹង" : "Dismiss notification"}
           className="absolute right-2 top-2 rounded-sm p-1 text-foreground/50 opacity-0 transition-opacity hover:text-foreground hover:opacity-100 group-hover:opacity-100 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring cursor-pointer"
           style={{ opacity: 0.5 }} // Ensure always visible for clarity
         >

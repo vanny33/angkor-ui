@@ -13,18 +13,29 @@ export function PreviewCard({ children, locale }: PreviewCardProps) {
   const [isPreviewDark, setIsPreviewDark] = useState(false);
   const [isAnimated, setIsAnimated] = useState(true);
 
-  // Clone children to inject animated={isAnimated} prop if possible
-  const childrenWithProps = React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      // For groups of elements, we might have multiple children or subcomponents.
-      // We can clone and override the animated prop on them.
-      return React.cloneElement(child as React.ReactElement<any>, {
-        animated: isAnimated,
-        locale: locale,
-      });
-    }
-    return child;
-  });
+  // Preview examples are usually wrapped in layout elements. Walk that small tree so
+  // the toggle reaches the actual Angkor UI controls instead of leaking an
+  // `animated` attribute onto a native div.
+  const withPreviewProps = (node: React.ReactNode): React.ReactNode =>
+    React.Children.map(node, (child) => {
+      if (!React.isValidElement(child)) return child;
+
+      const childProps = child.props as { children?: React.ReactNode };
+      const nextChildren = childProps.children
+        ? withPreviewProps(childProps.children)
+        : childProps.children;
+
+      if (child.type === Button) {
+        return React.cloneElement(
+          child as React.ReactElement<{ animated?: boolean }>,
+          { animated: isAnimated }
+        );
+      }
+
+      return React.cloneElement(child, undefined, nextChildren);
+    });
+
+  const childrenWithProps = withPreviewProps(children);
 
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-background shadow-sm select-none">
