@@ -120,12 +120,12 @@ export function ComponentPageClient({ locale, slug }: ComponentPageClientProps) 
       {/* Custom Styling Accent */}
       <section className="space-y-3">
         <h2 className="text-xl font-bold">{h.styling}</h2>
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-6 border border-border bg-card rounded-lg shadow-sm">
-          <div className="flex-1 space-y-3">
-            <CodeBlock code={comp.customStyleCode} />
-          </div>
-          <div className="flex shrink-0 items-center justify-center p-4 border border-dashed border-border rounded-lg bg-muted/20 min-w-[200px]">
+        <div className="flex flex-col gap-4 p-6 border border-border bg-card rounded-lg shadow-sm">
+          <div className="flex items-center justify-center p-6 border border-dashed border-border rounded-lg bg-muted/20 w-full">
             {comp.renderCustomStyle()}
+          </div>
+          <div className="w-full">
+            <CodeBlock code={comp.customStyleCode} />
           </div>
         </div>
       </section>
