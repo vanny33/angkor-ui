@@ -1,0 +1,155 @@
+[
+  {
+    "name": "button",
+    "description": {
+      "en": "Beautiful, animated button component with multiple sizes and variants.",
+      "km": "ប៊ូតុងដ៏ស្រស់ស្អាតនិងមានចលនា ជាមួយទំហំនិងជម្រើសជាច្រើន។"
+    },
+    "dependencies": [
+      "class-variance-authority",
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "@radix-ui/react-slot"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "input",
+    "description": {
+      "en": "Customizable text input field with labels, errors, counters, and password toggle.",
+      "km": "ប្រអប់បញ្ចូលអត្ថបទអាចកែតម្រូវបាន ជាមួយស្លាក កំហុស កុងទ័រ និងប៊ូតុងបង្ហាញលេខសម្ងាត់។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "checkbox",
+    "description": {
+      "en": "Accessible checkbox component supporting standard, indeterminate, and description states.",
+      "km": "ប្រអប់ធីកងាយស្រួលប្រើ គាំទ្រស្ថានភាពធម្មតា មិនទាន់សម្រេច និងការពិពណ៌នា។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react",
+      "@radix-ui/react-checkbox"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "select",
+    "description": {
+      "en": "Animated combobox select component with built-in search and clear actions.",
+      "km": "ប្រអប់ជ្រើសរើសមានចលនា ជាមួយមុខងារស្វែងរកនិងលុបជម្រើស។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react",
+      "@radix-ui/react-popover"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "dialog",
+    "description": {
+      "en": "Compound overlay modal dialog component with keyboard escape and focus trap.",
+      "km": "ប្រអប់សារផ្ទាំងលេចឡើង ជាមួយការគ្រប់គ្រងក្តារចុច និងការកំណត់ទំហំផ្សេងៗ។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react",
+      "@radix-ui/react-dialog"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "toast",
+    "description": {
+      "en": "A queueable notification system with imperative triggers and promise toasts.",
+      "km": "ប្រព័ន្ធផ្ដល់ដំណឹងដែលអាចតម្រៀបជួរបាន ជាមួយកាតសេចក្ដីប្រកាសនិងចលនា។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "tabs",
+    "description": {
+      "en": "Flexible tab selector with sliding active indicators and persistent contents.",
+      "km": "ផ្ទាំងជ្រើសរើសមាតិកាដ៏បត់បែន ជាមួយសញ្ញាសម្គាល់ផ្ទាំងសកម្មនិងចលនារុញ។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "@radix-ui/react-tabs"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "radio-group",
+    "description": {
+      "en": "Accessible radio group inputs with card style options and dot scaling animation.",
+      "km": "ក្រុមប៊ូតុងមូលជ្រើសរើស ជាមួយជម្រើសរចនាប័ទ្មកាតនិងចលនាចំណុចកណ្ដាល។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "@radix-ui/react-radio-group"
+    ],
+    "registryDependencies": []
+  },
+  {
+    "name": "data-table",
+    "description": {
+      "en": "TanStack Table configuration with client/server pagination, mobile responsive mode, and CSV exports.",
+      "km": "តារាងទិន្នន័យ TanStack Table ជាមួយការបែងចែកទំព័រ របៀបបង្ហាញលើទូរស័ព្ទ និងការទាញយក CSV។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "@tanstack/react-table",
+      "lucide-react"
+    ],
+    "registryDependencies": [
+      "button",
+      "input",
+      "select"
+    ]
+  },
+  {
+    "name": "date-picker",
+    "description": {
+      "en": "Khmer/English date picker wrapping React DayPicker and optional Khmer numerals.",
+      "km": "ប្រអប់ជ្រើសរើសកាលបរិច្ឆេទខ្មែរ/អង់គ្លេស ជាមួយលេខខ្មែរនិងប៊ូតុងកំណត់ឡើងវិញ។"
+    },
+    "dependencies": [
+      "clsx",
+      "tailwind-merge",
+      "motion",
+      "lucide-react",
+      "react-day-picker",
+      "date-fns",
+      "@radix-ui/react-popover"
+    ],
+    "registryDependencies": [
+      "button"
+    ]
+  }
+]

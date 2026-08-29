@@ -1,0 +1,17 @@
+{
+  "name": "angkor-ui-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Angkor UI - Bilingual Khmer/English React Component Library",
+  "scripts": {
+    "dev": "pnpm --filter docs dev",
+    "build": "node scripts/build-registry.js && pnpm --filter react build && pnpm --filter cli build && pnpm --filter docs build",
+    "test": "pnpm --filter react test",
+    "typecheck": "pnpm -r exec tsc --noEmit",
+    "lint": "pnpm -r exec eslint src",
+    "cli": "node packages/cli/dist/index.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}
