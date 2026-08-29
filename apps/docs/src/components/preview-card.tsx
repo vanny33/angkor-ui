@@ -16,24 +16,28 @@ export function PreviewCard({ children, locale }: PreviewCardProps) {
   // Preview examples are usually wrapped in layout elements. Walk that small tree so
   // the toggle reaches the actual Angkor UI controls instead of leaking an
   // `animated` attribute onto a native div.
-  const withPreviewProps = (node: React.ReactNode): React.ReactNode =>
-    React.Children.map(node, (child) => {
-      if (!React.isValidElement(child)) return child;
+  const withPreviewProps = (node: React.ReactNode): React.ReactNode => {
+    if (Array.isArray(node)) {
+      return node.map(withPreviewProps);
+    }
 
-      const childProps = child.props as { children?: React.ReactNode };
-      const nextChildren = childProps.children
-        ? withPreviewProps(childProps.children)
-        : childProps.children;
+    if (!React.isValidElement(node)) return node;
 
-      if (child.type === Button) {
-        return React.cloneElement(
-          child as React.ReactElement<{ animated?: boolean }>,
-          { animated: isAnimated }
-        );
-      }
+    const childProps = node.props as { children?: React.ReactNode };
+    const nextChildren = childProps.children === undefined
+      ? undefined
+      : withPreviewProps(childProps.children);
 
-      return React.cloneElement(child, undefined, nextChildren);
-    });
+    if (node.type === Button) {
+      return React.cloneElement(
+        node as React.ReactElement<{ animated?: boolean }>,
+        { animated: isAnimated }
+      );
+    }
+
+    // Passing a single element through unchanged is important for Radix `asChild`.
+    return React.cloneElement(node, undefined, nextChildren);
+  };
 
   const childrenWithProps = withPreviewProps(children);
 
