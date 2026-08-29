@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Angkor UI - Bilingual Khmer/English React Component Library",
+  "license": "MIT",
   "scripts": {
     "dev": "pnpm --filter docs dev",
     "build": "node scripts/build-registry.js && pnpm --filter react build && pnpm --filter cli build && pnpm --filter docs build",

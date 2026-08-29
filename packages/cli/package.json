@@ -2,6 +2,7 @@
   "name": "angkor-ui",
   "version": "1.0.0",
   "description": "Angkor UI CLI tool to initialize and add components.",
+  "license": "MIT",
   "main": "dist/index.js",
   "bin": {
     "angkor-ui": "./dist/index.js"

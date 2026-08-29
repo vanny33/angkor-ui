@@ -2,6 +2,7 @@
   "name": "@angkor-ui/react",
   "version": "1.0.0",
   "description": "Angkor UI React component library package",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

@@ -18,15 +18,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [darkMode, setDarkModeState] = useState(false);
 
   useEffect(() => {
-    // Read from localStorage on mount
     const savedTheme = localStorage.getItem("angkor-theme") as ThemeType;
-    if (savedTheme) {
+    if (["default", "angkor-gold", "bayon-stone", "mekong-blue", "royal-red"].includes(savedTheme)) {
       setThemeState(savedTheme);
     }
 
     const savedDarkMode = localStorage.getItem("angkor-dark") === "true";
-    // Or system preference
-    const prefersDark = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // Wait, prefers-color-scheme
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = localStorage.getItem("angkor-dark") !== null ? savedDarkMode : systemPrefersDark;
     setDarkModeState(isDark);

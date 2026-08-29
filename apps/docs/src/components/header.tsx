@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sun, Moon, Languages, Palette, Menu, X, Github } from "lucide-react";
@@ -12,7 +12,27 @@ export function Header() {
   const { t, locale, setLocale } = useTranslation();
   const { theme, setTheme, darkMode, setDarkMode } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const themeMenuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const closeThemeMenu = (event: MouseEvent) => {
+      if (!themeMenuRef.current?.contains(event.target as Node)) {
+        setThemeMenuOpen(false);
+      }
+    };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setThemeMenuOpen(false);
+    };
+
+    document.addEventListener("mousedown", closeThemeMenu);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("mousedown", closeThemeMenu);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
 
   const handleLanguageToggle = () => {
     setLocale(locale === "en" ? "km" : "en");
@@ -67,21 +87,31 @@ export function Header() {
         {/* Action Controls */}
         <div className="hidden md:flex items-center gap-3">
           {/* Theme Selector */}
-          <div className="relative group">
+          <div className="relative" ref={themeMenuRef}>
             <Button
               variant="ghost"
               size="icon"
               className="h-9 w-9"
               animated={false}
               aria-label="Change theme"
+              aria-expanded={themeMenuOpen}
+              aria-controls="theme-menu"
+              onClick={() => setThemeMenuOpen((open) => !open)}
             >
               <Palette className="h-4 w-4" />
             </Button>
-            <div className="absolute right-0 mt-2 w-40 origin-top-right rounded-md border border-border bg-popover p-1 shadow-md scale-0 group-hover:scale-100 transition-transform z-50">
+            {themeMenuOpen && (
+            <div id="theme-menu" role="menu" aria-label="Color theme" className="absolute right-0 mt-2 w-44 origin-top-right rounded-md border border-border bg-popover p-1 shadow-md z-50">
               {themesList.map((tItem) => (
                 <button
                   key={tItem.name}
-                  onClick={() => setTheme(tItem.name)}
+                  type="button"
+                  role="menuitemradio"
+                  aria-checked={theme === tItem.name}
+                  onClick={() => {
+                    setTheme(tItem.name);
+                    setThemeMenuOpen(false);
+                  }}
                   className={`flex w-full items-center gap-2 rounded-sm px-2.5 py-1.5 text-xs text-left cursor-pointer hover:bg-accent ${
                     theme === tItem.name ? "font-semibold text-primary" : ""
                   }`}
@@ -91,6 +121,7 @@ export function Header() {
                 </button>
               ))}
             </div>
+            )}
           </div>
 
           {/* Language Switcher */}
@@ -173,6 +204,7 @@ export function Header() {
               {themesList.map((tItem) => (
                 <button
                   key={tItem.name}
+                  type="button"
                   onClick={() => setTheme(tItem.name)}
                   className={`flex items-center gap-1 px-3 py-1.5 border rounded-md text-xs cursor-pointer ${
                     theme === tItem.name ? "border-primary bg-primary/10 text-primary" : "border-border text-muted-foreground"

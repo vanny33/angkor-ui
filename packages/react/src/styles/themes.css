@@ -38,7 +38,7 @@
   --ring: 240 5.9% 10%;
 }
 
-.dark [data-theme="default"], .dark:root:not([data-theme]) {
+:root.dark[data-theme="default"], .dark [data-theme="default"], :root.dark:not([data-theme]) {
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
   --card: 240 10% 3.9%;
@@ -87,7 +87,7 @@
   --ring: 36 80% 40%;
 }
 
-.dark [data-theme="angkor-gold"] {
+:root.dark[data-theme="angkor-gold"], .dark [data-theme="angkor-gold"] {
   --background: 36 20% 8%;
   --foreground: 36 30% 95%;
   --card: 36 15% 11%;
@@ -136,7 +136,7 @@
   --ring: 120 10% 35%;
 }
 
-.dark [data-theme="bayon-stone"] {
+:root.dark[data-theme="bayon-stone"], .dark [data-theme="bayon-stone"] {
   --background: 120 10% 9%;
   --foreground: 120 4% 92%;
   --card: 120 8% 12%;
@@ -185,7 +185,7 @@
   --ring: 210 50% 32%;
 }
 
-.dark [data-theme="mekong-blue"] {
+:root.dark[data-theme="mekong-blue"], .dark [data-theme="mekong-blue"] {
   --background: 210 30% 8%;
   --foreground: 210 15% 95%;
   --card: 210 20% 11%;
@@ -234,7 +234,7 @@
   --ring: 350 75% 35%;
 }
 
-.dark [data-theme="royal-red"] {
+:root.dark[data-theme="royal-red"], .dark [data-theme="royal-red"] {
   --background: 350 25% 8%;
   --foreground: 350 15% 95%;
   --card: 350 20% 11%;
